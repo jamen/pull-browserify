@@ -1,19 +1,19 @@
 # pull-browserify
 
-> Pull stream functions for Browserify
+> Browserify functions for pull stream
 
 This simply wraps [`browserify`](https://npmjs.com/browserify) in pull-stream functions.
 
 ```js
 var pull = require('pull-stream')
 var vinyl = require('pull-vinyl')
-var bify = require('pull-browserify')
+var b = require('pull-browserify')
 
 pull(
-  bify('some-file.js'),
-  bify.add('another-file.js'),
-  bify.transform('babelify', { ...opts }),
-  bify.bundle(),
+  b.source('some-file.js'),
+  b.add('another-file.js'),
+  b.transform('babelify', { ...opts }),
+  b.bundle(),
   vinyl.map('index.js'),
   vinyl.write('out')
 )

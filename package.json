@@ -1,6 +1,6 @@
 {
   "name": "pull-browserify",
-  "description": "Pull stream functions for Browserify",
+  "description": "Browserify functions for pull stream",
   "version": "0.2.1",
   "homepage": "https://github.com/jamen/pull-browserify",
   "author": "Jamen Marz (https://git.io/jamen)",
