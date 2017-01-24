@@ -63,6 +63,7 @@ pull(
   vinyl.map('index.js'),
   vinyl.write('out')
 )
+```
 
 ## License
 
