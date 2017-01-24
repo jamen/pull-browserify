@@ -1,6 +1,6 @@
 # pull-browserify
 
-> A pull-stream source for Browserify
+> Pull stream functions for Browserify
 
 This simply wraps [`browserify`](https://npmjs.com/browserify) in pull-stream functions.
 
