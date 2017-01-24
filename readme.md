@@ -30,11 +30,11 @@ $ npm install --save pull-browserify
 ### `browserify([files, opts])`
 ### `browserify.source([files, opts])`
 
-Creates a browserify object in the pipeline, where you can use the functions (or `pull.map`) to manage it.
+Creates a browserify object in the pipeline, where you can use the functions (or `pull.through`) to manage it.
 
 ### `browserify.{add, require, external, ignore, exclude, transform}`
 
-These just wrap their [`browserify`](https://npmjs.com/browserify) counterparts in `pull.map`. You can read the docs there.
+These just wrap their [`browserify`](https://npmjs.com/browserify) counterparts in `pull.through`. You can read the docs there.
 
 ```js
 var settings = pull(
