@@ -5,20 +5,16 @@ var through = pull.through
 var asyncMap = pull.asyncMap
 
 module.exports = browserify
-browserify.source = browserify
-browserify.add = add
-browserify.require = _require
-browserify.bundle = bundle
-browserify.external = external
-browserify.ignore = ignore
-browserify.exclude = exclude
-browserify.transform = transform
 
-function browserify (files, opts) { return once(_browserify(files, opts)) }
-function add (file, opts) { return through(b => b.add(file, opts)) }
-function _require (file, opts) { return through(b => b.require(file, opts)) }
-function bundle () { return asyncMap((b, cb) => b.bundle(cb)) }
-function external (file) { return through(b => b.external(file)) }
-function ignore (file) { return through(b => b.ignore(file)) }
-function exclude (file) { return through(b => b.exclude(file)) }
-function transform (tr, opts) { return through(b => b.transform(tr, opts)) }
+function browserify (files, opts) {
+  return once(_browserify(files, opts))
+}
+
+browserify.source = browserify
+browserify.add = (file, opts) => through(b => b.add(file, opts))
+browserify.require = (file, opts) => through(b => b.require(file, opts))
+browserify.external = (file) => through(b => b.external(file))
+browserify.ignore = (file) => through(b => b.ignore(file))
+browserify.exclude = (file) => through(b => b.exclude(file))
+browserify.transform = (tr, opts) => through(b => b.transform(tr, opts))
+browserify.bundle = () => asyncMap((b, cb) => b.bundle(cb))
