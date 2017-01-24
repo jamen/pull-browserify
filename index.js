@@ -1,7 +1,7 @@
 var _browserify = require('browserify')
 var pull = require('pull-stream')
 var once = pull.once
-var map = pull.map
+var through = pull.through
 var asyncMap = pull.asyncMap
 
 module.exports = browserify
@@ -14,34 +14,11 @@ browserify.ignore = ignore
 browserify.exclude = exclude
 browserify.transform = transform
 
-function browserify (files, opts) {
-  return once(_browserify(files, opts))
-}
-
-function add (file, opts) {
-  return map(function (b) { b.add(file, opts); return b })
-}
-
-function _require (file, opts) {
-  return map(function (b) { b.require(file, opts); return b })
-}
-
-function bundle () {
-  return asyncMap(function (b, cb) { b.bundle(cb) })
-}
-
-function external (file) {
-  return map(function (b) { b.external(file); return b })
-}
-
-function ignore (file) {
-  return map(function (b) { b.ignore(file); return b })
-}
-
-function exclude (file) {
-  return map(function (b) { b.exclude(file); return b })
-}
-
-function transform (tr, opts) {
-  return map(function (b) { b.transform(tr, opts); return b })
-}
+function browserify (files, opts) { return once(_browserify(files, opts)) }
+function add (file, opts) { return through(b => b.add(file, opts)) }
+function _require (file, opts) { return through(b => b.require(file, opts)) }
+function bundle () { return asyncMap((b, cb) => b.bundle(cb)) }
+function external (file) { return through(b => b.external(file)) }
+function ignore (file) { return through(b => b.ignore(file)) }
+function exclude (file) { return through(b => b.exclude(file)) }
+function transform (tr, opts) { return through(b => b.transform(tr, opts)) }
